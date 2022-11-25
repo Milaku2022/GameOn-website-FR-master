@@ -61,13 +61,12 @@
 </div>
 
 <div class="bground">
-    <div class="success">Merci ! Votre réservation a été reçue.</div>
-    <div class="content">
+     <div class="content">
         <span class="close"></span>
         <div class="modal-body">
-            <form id="form" name="reserve" action="index.html" method="get" onsubmit="return validate();">
+            <form id="form" name="reserve" onsubmit="return validate();">
                 <div class="formData">
-                    <label>Prénom</label><br>
+                    <label for="first">Prénom</label><br>
                     <input class="text-control" type="text" id="first" name="first" minlength="2"><br>
                     <span class="prenom_m small">Veuillez entrer 2 caractères ou plus pour le champ du prénom</span>
                 </div>
@@ -89,7 +88,7 @@
                 <div class="formData">
                     <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                     <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
-                    <span class="quantity_m small">Vous devez entrer un nombre entier</span>
+                    <span class="quantity_m small">Vous devez entrer un nombre entier positif</span>
                 </div>
                 <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
                 <div class="formData">
@@ -139,6 +138,9 @@
                 </div>
                 <input class="btn-submit button" type="submit" value="C'est parti">
             </form>
+            <div class="success"><p>Merci ! Votre réservation a été reçue.</p>
+                <button type="button" class="btn-submit closeSuccess">Fermer</button>
+            </div>
         </div>
     </div>
 </div></main>

@@ -13,6 +13,7 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelector(".close");
+const form = document.querySelector('#form');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -45,6 +46,18 @@ const option_m = document.querySelector('.option_m');
 const accepter_m = document.querySelector('.accepter_m');
 const success = document.querySelector('.success');
 let isValid = false;
+const closeSuccess = document.querySelector('.closeSuccess');
+
+closeSuccess.addEventListener("click" , closeModalSuccess);
+function closeModalSuccess() {
+    modalbg.style.display = "none";
+    form.reset();
+    form.style.display = "block";
+    success.style.display = "none";
+    quantity_m.style.display = "none";
+    mail_m.style.display = "none";
+
+}
 
 validation.addEventListener('click' , f_valid);
 // fonction envoi du formulaire
@@ -61,9 +74,12 @@ function f_valid(e) {
 
     if(isValid) {
         success.style.display = "block";
+        form.style.display= "none";
+
     }
     else {
         success.style.display = "none";
+        form.style.display = "block";
     }
 
 }
@@ -97,7 +113,7 @@ function checkEmail() {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}) + $/;
     if(email.value.match(mailformat)) {
         mail_m.style.display = "none";
-        isValid = true
+        isValid = true;
     }
     else {
         mail_m.style.display = "block";isValid = false;
@@ -106,7 +122,7 @@ function checkEmail() {
 
 // fonction date d'un nombre entier avec l'expression régulière
 function numberValidation() {
-    var nombreEntier = /\d+/;
+    var nombreEntier =[0-99];
     if(quantity.value.match(nombreEntier)) {
         quantity_m.style.display = "none";
         isValid = true
