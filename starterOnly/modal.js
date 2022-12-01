@@ -33,12 +33,13 @@ function closeModal() {
 // validation du bouton "c'est parti"
 
 const validation = document.querySelector('.btn-submit');
-const prenom = document.getElementById('first');
+const prenom = document.querySelector("#first");
 const prenom_m = document.querySelector('.prenom_m');
 const nom = document.querySelector("#last");
 const nom_m = document.querySelector('.nom_m');
 const email = document.querySelector("#email");
 const mail_m = document.querySelector('.mail_m');
+const naissance_m = document.querySelector('.naissance_m');
 const quantity = document.querySelector("#quantity");
 const quantity_m = document.querySelector('.quantity_m');
 const checkinput = document.querySelectorAll('.checkbox-input');
@@ -56,6 +57,7 @@ function closeModalSuccess() {
     success.style.display = "none";
     quantity_m.style.display = "none";
     mail_m.style.display = "none";
+    naissance_m.style.display = "none";
 
 }
 
@@ -68,6 +70,7 @@ function f_valid(e) {
     prenomValid();
     nomValid();
     checkEmail();
+    birthdatValid();
     numberValidation();
     choixValid();
     accepterValid();
@@ -93,7 +96,7 @@ function prenomValid() {
     }
     else {
         prenom_m.style.display = "none";
-        isValid = true
+        isValid = true;
     }
 }
 // fonction nom validation
@@ -103,20 +106,36 @@ function nomValid() {
         isValid = false;
     }
     else {
-        nom_m.style.display = "none";isValid = true
+        nom_m.style.display = "none";
+        isValid = true;
     }
 }
 
 // fonction email valide avec l'expression réguliere
 
 function checkEmail() {
-    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}) + $/;
+    // var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}) + $/;
+    var mailformat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/i;
+
     if(email.value.match(mailformat)) {
         mail_m.style.display = "none";
         isValid = true;
     }
     else {
         mail_m.style.display = "block";isValid = false;
+    }
+}
+// validation de la date de naissance
+function birthdatValid(){
+    var birthValue = document.getElementById('birthdate').value;
+    var birthValue=false;
+    if ( birthValue ){
+        naissance_m.style.display = "none";
+        isValid = true;
+    }
+    else {
+        naissance_m.style.display = "block";
+        isValid = false;
     }
 }
 
