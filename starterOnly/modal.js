@@ -46,7 +46,7 @@ const checkinput = document.querySelectorAll('.checkbox-input');
 const option_m = document.querySelector('.option_m');
 const accepter_m = document.querySelector('.accepter_m');
 const success = document.querySelector('.success');
-let isValid = false;
+
 const closeSuccess = document.querySelector('.closeSuccess');
 
 closeSuccess.addEventListener("click" , closeModalSuccess);
@@ -75,7 +75,7 @@ function f_valid(e) {
     choixValid();
     accepterValid();
 
-    if(isValid) {
+    if(prenomValid() && nomValid() && checkEmail() && birthdatValid() && numberValidation() && choixValid() && accepterValid() ) {
         success.style.display = "block";
         form.style.display= "none";
 
@@ -92,22 +92,22 @@ function prenomValid() {
     if(prenom.value.length<2) {
 
         prenom_m.style.display = "block";
-        isValid = false;
+        return false;
     }
     else {
         prenom_m.style.display = "none";
-        isValid = true;
+        return true;
     }
 }
 // fonction nom validation
 function nomValid() {
     if(nom.value.length<2) {
         nom_m.style.display = "block";
-        isValid = false;
+        return false;
     }
     else {
         nom_m.style.display = "none";
-        isValid = true;
+        return true;
     }
 }
 
@@ -119,35 +119,36 @@ function checkEmail() {
 
     if(email.value.match(mailformat)) {
         mail_m.style.display = "none";
-        isValid = true;
+        return true;
     }
     else {
-        mail_m.style.display = "block";isValid = false;
+        mail_m.style.display = "block";return false;
     }
 }
 // validation de la date de naissance
 function birthdatValid(){
     var birthValue = document.getElementById('birthdate').value;
-    var birthValue=false;
+    
     if ( birthValue ){
         naissance_m.style.display = "none";
-        isValid = true;
+        return true;
     }
     else {
         naissance_m.style.display = "block";
-        isValid = false;
+        return false;
     }
 }
 
 // fonction date d'un nombre entier avec l'expression régulière
 function numberValidation() {
-    var nombreEntier =[0-99];
-    if(quantity.value.match(nombreEntier)) {
+    const regexQuantity = /^[1-9]?[0-9]{1,1}$/;
+    if(regexQuantity.test(String(quantity.value))) {
         quantity_m.style.display = "none";
-        isValid = true
+        return true;
     }
     else {
-        quantity_m.style.display = "block";isValid = false;
+        quantity_m.style.display = "block";
+        return false;
     }
 }
 
@@ -163,10 +164,11 @@ function choixValid() {
     }
     if(valid) {
         option_m.style.display = "none";
-        isValid = true
+        return true
     }
     else {
-        option_m.style.display = "block";isValid = false;
+        option_m.style.display = "block";
+        return false;
     }
 }
 
@@ -174,9 +176,10 @@ function choixValid() {
 function accepterValid() {
     if(reserve.conditions.checked==true) {
         accepter_m.style.display = "none";
-        isValid = true
+        return true;
     }
     else {
-        accepter_m.style.display = "block";isValid = false;
+        accepter_m.style.display = "block";
+        return false;
     }
 }
